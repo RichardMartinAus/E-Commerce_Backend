@@ -8,7 +8,7 @@ router.get("/", async (req, res) => {
   // be sure to include its associated Products
   try {
     const categoryData = await Category.findAll(req, {
-      include: [{ model: Product, through: Category, as: "product_category" }],
+      include: [{ model: Product }],
     });
 
     if (!categoryData) {
@@ -41,7 +41,7 @@ router.put("/:id", (req, res) => {
   // update a category by its `id` value
 });
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", async (req, res) => {
   // delete a category by its `id` value
   try {
     const categoryData = await Category.destroy({
